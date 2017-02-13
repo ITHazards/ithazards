@@ -1,0 +1,17 @@
+version: '3'
+services:
+  search:
+    container_name: elasticsearch
+    image: elasticsearch:1.7-alpine
+    ports:
+      - "9200-9300:9200-9300"
+    network_mode: bridge
+    healthcheck:
+      test: "curl -f http://localhost:9200/_cluster/health | grep green"
+  parser:
+    build: tflow/
+    container_name: parser
+    command: lein run -- -i http://elasticsearch:9200 https://static.nvd.nist.gov/feeds/xml/cve/nvdcve-2.0-2002.xml.gz
+    network_mode: bridge
+    links:
+      - search
