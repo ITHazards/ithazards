@@ -1,0 +1,1 @@
+web: java $JVM_OPTS -cp target/phiber-optik.jar clojure.main -m phiber-optik.server
