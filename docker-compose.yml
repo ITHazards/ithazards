@@ -13,6 +13,8 @@ services:
     container_name: parser
     command: lein run -- -i http://elasticsearch:9200 https://static.nvd.nist.gov/feeds/xml/cve/nvdcve-2.0-2002.xml.gz
     network_mode: bridge
+    depends_on:
+      - search
     links:
       - search
   api:
@@ -21,5 +23,21 @@ services:
     ports:
       - "3001:3001"
     network_mode: bridge
+    depends_on:
+      - search
     links:
       - search
+    healthcheck:
+      test: "curl -f http://localhost:3001/ | grep -i swagger"
+  web:
+    build: phiber-optik/
+    container_name: web
+    ports:
+      - "3000:3000"
+    network_mode: bridge
+    depends_on:
+      - api
+    links:
+      - api
+    healthcheck:
+      test: "curl -f http://localhost:3000/ | grep -i app.js"
