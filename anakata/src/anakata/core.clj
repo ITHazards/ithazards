@@ -7,6 +7,11 @@
             [clojurewerkz.elastisch.rest.document :as esd]
             [clojurewerkz.elastisch.rest.response :as esrsp]))
 
+(def es-url
+  (let [env-es-url (System/getenv "ES_URL")]
+    (if (nil? env-es-url)
+      "http://localhost:9200"
+      env-es-url)))
 
 (s/defschema Vulnerability
   {:cve-id s/Str
@@ -29,12 +34,18 @@
           (ensure-vulnerability (get hit :_source))))
       [])))
 
+(defn get-response [index type from size]
+  (esrsp/hits-from (esd/search (esr/connect es-url)
+                               index
+                               type
+                               :from from
+                               :size size)))
+
 (defn get-vulnerabilities [from size]
-  (let [conn (esr/connect "http://127.0.0.1:9200")
-        res (esd/search conn "vulnerabilities" "vulnerability"
-                        :from from
-                        :size size)
-        hits (esrsp/hits-from res)]
+  (let [hits (get-response "vulnerabilities"
+                           "vulnerability"
+                           from
+                           size)]
       (read-vulnerabilities hits)))
 
 (def ithazards
