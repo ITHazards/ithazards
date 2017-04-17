@@ -8,7 +8,8 @@
                  [clojurewerkz/elastisch "2.2.1"]]
   :ring {:handler anakata.core/ithazards}
   :profiles {:dev {
-                   :plugins [[lein-ring "0.9.7"]]
+                   :plugins [[lein-ring "0.9.7"]
+                             [lein-midje "3.2.1"]]
                    :dependencies [[javax.servlet/servlet-api "2.5"]
                                   [midje "1.6.3"]]
                    :ring {:port 3001}}})
