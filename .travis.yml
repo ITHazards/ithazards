@@ -1,0 +1,5 @@
+language: clojure
+
+before_install: cd anakata
+
+script: lein midje
