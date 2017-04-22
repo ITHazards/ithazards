@@ -148,10 +148,4 @@
     (println (apply str [
       "Parsing finished, "
       (count entries)
-      " entries parsed"]))
-    ;; (loop [[entry & rest] entries]
-    ;;   (if entry
-    ;;     (do
-    ;;       (println (get entry :cve-id))
-    ;;       (recur rest))))
-  ))
+      " entries parsed"]))))
