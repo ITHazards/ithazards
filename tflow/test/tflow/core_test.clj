@@ -1,4 +1,5 @@
 (ns tflow.core-test
+  (:use midje.sweet)
   (:require [clojure.test :refer :all]
             [tflow.core :refer :all]))
 
