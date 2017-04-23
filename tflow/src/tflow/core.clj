@@ -156,5 +156,4 @@
     (println (apply str [
       "Parsing finished, "
       (count entries)
-      " entries parsed"])))
-  )
+      " entries parsed"]))))

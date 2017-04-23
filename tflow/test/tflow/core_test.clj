@@ -45,5 +45,45 @@
              (init-indices conn)
              conn => expected_conn
              (init-indices expected_conn)
-             conn => expected_conn)
-       )
+             conn => expected_conn))
+
+(def indexer [])
+(def modified-nvd expected-modified-zipper)
+(def expected-modified-info [
+                             {
+                              :cve-id "CVE-2012-6697"
+                              :last-modified "2017-04-13T10:59:00.637-04:00"
+                              :published "2017-04-13T10:59:00.480-04:00"
+                              :summary "InspIRCd before 2.0.7 allows remote attackers to cause a denial of service (infinite loop)."}
+                             {
+                              :cve-id "CVE-2012-1301"
+                              :last-modified "2017-04-13T13:59:00.187-04:00"
+                              :published "2017-04-13T13:59:00.170-04:00"
+                              :summary "The FeedProxy.aspx script in Umbraco 4.7.0 allows remote attackers to proxy requests on their behalf via the \"url\" parameter."}
+                             {
+                              :cve-id "CVE-2010-1821"
+                              :last-modified "2017-04-13T12:59:00.737-04:00"
+                              :published "2017-04-13T12:59:00.723-04:00"
+                              :summary "Apple Mac OS X 10.6 through 10.6.3 and Mac OS X Server 10.6 through 10.6.3 allows local users to obtain system privileges."}
+                             {
+                              :cve-id "CVE-2010-1816"
+                              :last-modified "2017-04-13T12:59:00.567-04:00"
+                              :published "2017-04-13T12:59:00.533-04:00"
+                              :summary "Buffer overflow in ImageIO in Apple Mac OS X 10.6 through 10.6.3 and Mac OS X Server 10.6 through 10.6.3 allows remote attackers to execute arbitrary code or cause a denial of service (crash) via a crafted image."}
+                             {
+                              :affected-software ["cpe:/o:dataprobe:ibootbar_firmware:2007-09-20"]
+                              :cve-id "CVE-2007-6760"
+                              :last-modified "2017-04-13T15:38:09.210-04:00"
+                              :published "2017-04-07T17:59:00.193-04:00"
+                              :summary "Dataprobe iBootBar (with 2007-09-20 and possibly later beta firmware) allows remote attackers to bypass authentication, and conduct power-cycle attacks on connected devices, via a DCCOOKIE cookie."}
+                             {
+                              :affected-software ["cpe:/o:dataprobe:ibootbar_firmware:2007-09-20"]
+                              :cve-id "CVE-2007-6759"
+                              :last-modified "2017-04-13T15:37:40.617-04:00"
+                              :published "2017-04-07T17:59:00.163-04:00"
+                              :summary "Dataprobe iBootBar (with 2007-09-20 and possibly later released firmware) allows remote attackers to bypass authentication, and conduct power-cycle attacks on connected devices, via a DCRABBIT cookie."}])
+
+(facts "about `walk-entries`"
+       (fact "it indexes all entries"
+             (walk-entries (zip/down modified-nvd) ..indexer..) => expected-modified-info
+             (provided (esd/put ..indexer.. anything anything anything anything) => nil)))
