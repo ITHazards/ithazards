@@ -87,3 +87,13 @@
        (fact "it indexes all entries"
              (walk-entries (zip/down modified-nvd) ..indexer..) => expected-modified-info
              (provided (esd/put ..indexer.. anything anything anything anything) => nil)))
+
+(facts "about `scrape-file`"
+       (fact "it processes a whole NVD file"
+             (scrape-file modified-xml-file "http://localhost:9200") => nil
+             (provided
+              (get-zipper modified-xml-file) => ..zipper..
+              (init-search "http://localhost:9200") => ..indexer..
+              (zip/node ..zipper..) => {:attrs {:pub_date "2010-09-09T09:09:09.000+02:00"}}
+              (zip/down ..zipper..) => ..entries..
+              (walk-entries ..entries.. ..indexer..) => [0 1 2 3 4 5])))
