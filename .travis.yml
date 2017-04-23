@@ -1,5 +1,9 @@
 language: clojure
 
-before_install: cd anakata
+install:
+  - cd anakata && lein deps; cd ..
+  - cd tflow && lein deps; cd ..
 
-script: lein midje
+script:
+  - cd anakata && lein midje; cd ..
+  - cd tflow && lein midje; cd ..
