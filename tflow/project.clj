@@ -10,4 +10,6 @@
                  [clojurewerkz/elastisch "2.2.1"] ]
   :main ^:skip-aot tflow.core
   :target-path "target/%s"
-  :profiles {:uberjar {:aot :all}})
+  :profiles {:uberjar {:aot :all}
+             :dev {:plugins [[lein-midje "3.2.1"]]
+                   :dependencies [[midje "1.6.3"]]}})

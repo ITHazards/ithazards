@@ -12,7 +12,6 @@
 
 (def source-url "https://nvd.nist.gov/feeds/xml/cve/nvdcve-2.0-Modified.xml.gz")
 (def es-url "http://localhost:9200")
-(def es nil)
 (def es-vulnerability-map {
     "vulnerability" {
       :properties {
@@ -45,6 +44,7 @@
 (defn get-zipper
   "Returns a zipper with the XML in the url."
   [url]
+  (println (apply str ["Parsing " url]))
   (zip/xml-zip (xml/parse-str (str/join "" (gunzip-text-lines url)))))
 
 (defn walk-software-list
@@ -85,17 +85,33 @@
     {}))
 
 (defn walk-entries
-  [entry]
+  [entry indexer]
   (if entry
     (let [content (walk-entry-content (zip/down entry))]
       (esd/put
-        es
+        indexer
         "vulnerabilities"
         "vulnerability"
         (get content :cve-id)
         content)
-      (conj (walk-entries (zip/right entry)) content))
+      (println (apply str [(get content :cve-id) " indexed"]))
+      (conj (walk-entries (zip/right entry) indexer) content))
     []))
+
+(defn init-indices [conn]
+  (if (not (esi/exists? conn "vulnerabilities"))
+    (do
+      (esi/create
+       conn
+       "vulnerabilities"
+       :mappings es-vulnerability-map
+       :settings es-vulnerability-settings))))
+
+(defn init-search [url]
+  (let [es (esr/connect url)]
+    (init-indices es)
+    (println (apply str ["Search engine initialized on " url]))
+    es))
 
 (def cli-options
   [
@@ -105,13 +121,13 @@
 
 (defn usage [options-summary]
   (->> [
-    "tflow is a vulnerability parser."
-    ""
-    "Usage: tflow [url_to_parse]"
-    ""
-    "Options:"
-    options-summary]
-    (str/join \newline)))
+        "tflow is a vulnerability parser."
+        ""
+        "Usage: tflow [url_to_parse]"
+        ""
+        "Options:"
+        options-summary]
+       (str/join \newline)))
 
 (defn exit [status msg]
   (println msg)
@@ -119,7 +135,7 @@
 
 (defn error-msg [errors]
   (str "The following errors occurred while parsing your command:\n\n"
-  (str/join \newline errors)))
+       (str/join \newline errors)))
 
 (defn -main
   "I don't do a whole lot ... yet."
@@ -132,26 +148,13 @@
       (>= (count arguments) 1) (def source-url (first arguments))
       errors (exit 1 (error-msg errors))))
   (let [
-    nvd (get-zipper source-url)]
-    (println (apply str ["Parsing " source-url " on " es-url]))
-    (def es (esr/connect es-url))
-    (if (not (esi/exists? es "vulnerabilities"))
-      (do
-        (esi/create
-          es
-          "vulnerabilities"
-          :mappings es-vulnerability-map
-          :settings es-vulnerability-settings)
-        ))
+    nvd (get-zipper source-url)
+    es (init-search es-url)]
     (def published (get (get (zip/node nvd) :attrs) :pub_date))
-    (def entries (walk-entries (zip/down nvd)))
+    (println (apply str ["Published date is " published]))
+    (def entries (walk-entries (zip/down nvd) es))
     (println (apply str [
       "Parsing finished, "
       (count entries)
-      " entries parsed"]))
-    ;; (loop [[entry & rest] entries]
-    ;;   (if entry
-    ;;     (do
-    ;;       (println (get entry :cve-id))
-    ;;       (recur rest))))
-  ))
+      " entries parsed"])))
+  )

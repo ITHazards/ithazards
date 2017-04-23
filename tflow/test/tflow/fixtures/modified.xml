@@ -1,0 +1,137 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<nvd xmlns:scap-core="http://scap.nist.gov/schema/scap-core/0.1" xmlns:cvss="http://scap.nist.gov/schema/cvss-v2/0.2" xmlns:vuln="http://scap.nist.gov/schema/vulnerability/0.4" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:patch="http://scap.nist.gov/schema/patch/0.1" xmlns="http://scap.nist.gov/schema/feed/vulnerability/2.0" xmlns:cpe-lang="http://cpe.mitre.org/language/2.0" nvd_xml_version="2.0" pub_date="2017-04-17T16:00:09" xsi:schemaLocation="http://scap.nist.gov/schema/patch/0.1 https://scap.nist.gov/schema/nvd/patch_0.1.xsd http://scap.nist.gov/schema/feed/vulnerability/2.0 https://scap.nist.gov/schema/nvd/nvd-cve-feed_2.0.xsd http://scap.nist.gov/schema/scap-core/0.1 https://scap.nist.gov/schema/nvd/scap-core_0.1.xsd">
+  <entry id="CVE-2007-6759">
+    <vuln:vulnerable-configuration id="http://nvd.nist.gov/">
+      <cpe-lang:logical-test operator="AND" negate="false">
+        <cpe-lang:logical-test operator="OR" negate="false">
+          <cpe-lang:fact-ref name="cpe:/o:dataprobe:ibootbar_firmware:2007-09-20"/>
+        </cpe-lang:logical-test>
+        <cpe-lang:logical-test operator="OR" negate="false">
+          <cpe-lang:fact-ref name="cpe:/h:dataprobe:ibootbar:-"/>
+        </cpe-lang:logical-test>
+      </cpe-lang:logical-test>
+    </vuln:vulnerable-configuration>
+    <vuln:vulnerable-software-list>
+      <vuln:product>cpe:/o:dataprobe:ibootbar_firmware:2007-09-20</vuln:product>
+    </vuln:vulnerable-software-list>
+    <vuln:cve-id>CVE-2007-6759</vuln:cve-id>
+    <vuln:published-datetime>2017-04-07T17:59:00.163-04:00</vuln:published-datetime>
+    <vuln:last-modified-datetime>2017-04-13T15:37:40.617-04:00</vuln:last-modified-datetime>
+    <vuln:cvss>
+      <cvss:base_metrics>
+        <cvss:score>7.5</cvss:score>
+        <cvss:access-vector>NETWORK</cvss:access-vector>
+        <cvss:access-complexity>LOW</cvss:access-complexity>
+        <cvss:authentication>NONE</cvss:authentication>
+        <cvss:confidentiality-impact>PARTIAL</cvss:confidentiality-impact>
+        <cvss:integrity-impact>PARTIAL</cvss:integrity-impact>
+        <cvss:availability-impact>PARTIAL</cvss:availability-impact>
+        <cvss:source>http://nvd.nist.gov</cvss:source>
+        <cvss:generated-on-datetime>2017-04-13T14:43:53.160-04:00</cvss:generated-on-datetime>
+      </cvss:base_metrics>
+    </vuln:cvss>
+    <vuln:cwe id="CWE-287"/>
+    <vuln:references xml:lang="en" reference_type="VENDOR_ADVISORY">
+      <vuln:source>MISC</vuln:source>
+      <vuln:reference href="http://blog.tmcnet.com/blog/tom-keating/computer-hardware/dataprobe-ibootbar-review.asp" xml:lang="en">http://blog.tmcnet.com/blog/tom-keating/computer-hardware/dataprobe-ibootbar-review.asp</vuln:reference>
+    </vuln:references>
+    <vuln:summary>Dataprobe iBootBar (with 2007-09-20 and possibly later released firmware) allows remote attackers to bypass authentication, and conduct power-cycle attacks on connected devices, via a DCRABBIT cookie.</vuln:summary>
+  </entry>
+  <entry id="CVE-2007-6760">
+    <vuln:vulnerable-configuration id="http://nvd.nist.gov/">
+      <cpe-lang:logical-test operator="AND" negate="false">
+        <cpe-lang:logical-test operator="OR" negate="false">
+          <cpe-lang:fact-ref name="cpe:/o:dataprobe:ibootbar_firmware:2007-09-20"/>
+        </cpe-lang:logical-test>
+        <cpe-lang:logical-test operator="OR" negate="false">
+          <cpe-lang:fact-ref name="cpe:/h:dataprobe:ibootbar:-"/>
+        </cpe-lang:logical-test>
+      </cpe-lang:logical-test>
+    </vuln:vulnerable-configuration>
+    <vuln:vulnerable-software-list>
+      <vuln:product>cpe:/o:dataprobe:ibootbar_firmware:2007-09-20</vuln:product>
+    </vuln:vulnerable-software-list>
+    <vuln:cve-id>CVE-2007-6760</vuln:cve-id>
+    <vuln:published-datetime>2017-04-07T17:59:00.193-04:00</vuln:published-datetime>
+    <vuln:last-modified-datetime>2017-04-13T15:38:09.210-04:00</vuln:last-modified-datetime>
+    <vuln:cvss>
+      <cvss:base_metrics>
+        <cvss:score>7.5</cvss:score>
+        <cvss:access-vector>NETWORK</cvss:access-vector>
+        <cvss:access-complexity>LOW</cvss:access-complexity>
+        <cvss:authentication>NONE</cvss:authentication>
+        <cvss:confidentiality-impact>PARTIAL</cvss:confidentiality-impact>
+        <cvss:integrity-impact>PARTIAL</cvss:integrity-impact>
+        <cvss:availability-impact>PARTIAL</cvss:availability-impact>
+        <cvss:source>http://nvd.nist.gov</cvss:source>
+        <cvss:generated-on-datetime>2017-04-13T14:42:12.470-04:00</cvss:generated-on-datetime>
+      </cvss:base_metrics>
+    </vuln:cvss>
+    <vuln:cwe id="CWE-287"/>
+    <vuln:references xml:lang="en" reference_type="VENDOR_ADVISORY">
+      <vuln:source>MISC</vuln:source>
+      <vuln:reference href="http://blog.tmcnet.com/blog/tom-keating/computer-hardware/dataprobe-ibootbar-review.asp" xml:lang="en">http://blog.tmcnet.com/blog/tom-keating/computer-hardware/dataprobe-ibootbar-review.asp</vuln:reference>
+    </vuln:references>
+    <vuln:summary>Dataprobe iBootBar (with 2007-09-20 and possibly later beta firmware) allows remote attackers to bypass authentication, and conduct power-cycle attacks on connected devices, via a DCCOOKIE cookie.</vuln:summary>
+  </entry>
+  <entry id="CVE-2010-1816">
+    <vuln:cve-id>CVE-2010-1816</vuln:cve-id>
+    <vuln:published-datetime>2017-04-13T12:59:00.533-04:00</vuln:published-datetime>
+    <vuln:last-modified-datetime>2017-04-13T12:59:00.567-04:00</vuln:last-modified-datetime>
+    <vuln:references xml:lang="en" reference_type="UNKNOWN">
+      <vuln:source>APPLE</vuln:source>
+      <vuln:reference href="https://support.apple.com/en-us/HT4188" xml:lang="en">APPLE-SA-2016-01-28-4188</vuln:reference>
+    </vuln:references>
+    <vuln:summary>Buffer overflow in ImageIO in Apple Mac OS X 10.6 through 10.6.3 and Mac OS X Server 10.6 through 10.6.3 allows remote attackers to execute arbitrary code or cause a denial of service (crash) via a crafted image.</vuln:summary>
+  </entry>
+  <entry id="CVE-2010-1821">
+    <vuln:cve-id>CVE-2010-1821</vuln:cve-id>
+    <vuln:published-datetime>2017-04-13T12:59:00.723-04:00</vuln:published-datetime>
+    <vuln:last-modified-datetime>2017-04-13T12:59:00.737-04:00</vuln:last-modified-datetime>
+    <vuln:references xml:lang="en" reference_type="UNKNOWN">
+      <vuln:source>APPLE</vuln:source>
+      <vuln:reference href="https://support.apple.com/en-us/HT4188" xml:lang="en">APPLE-SA-2016-01-28-4188</vuln:reference>
+    </vuln:references>
+    <vuln:summary>Apple Mac OS X 10.6 through 10.6.3 and Mac OS X Server 10.6 through 10.6.3 allows local users to obtain system privileges.</vuln:summary>
+  </entry>
+  <entry id="CVE-2012-1301">
+    <vuln:cve-id>CVE-2012-1301</vuln:cve-id>
+    <vuln:published-datetime>2017-04-13T13:59:00.170-04:00</vuln:published-datetime>
+    <vuln:last-modified-datetime>2017-04-13T13:59:00.187-04:00</vuln:last-modified-datetime>
+    <vuln:references xml:lang="en" reference_type="UNKNOWN">
+      <vuln:source>BUGTRAQ</vuln:source>
+      <vuln:reference href="http://www.securityfocus.com/archive/1/522218" xml:lang="en">20120405 [MATTA-2012-001] CVE-2012-1301; 0day; Open Proxy vulnerability in Umbraco 4.7</vuln:reference>
+    </vuln:references>
+    <vuln:references xml:lang="en" reference_type="UNKNOWN">
+      <vuln:source>BID</vuln:source>
+      <vuln:reference href="http://www.securityfocus.com/bid/52912" xml:lang="en">52912</vuln:reference>
+    </vuln:references>
+    <vuln:references xml:lang="en" reference_type="UNKNOWN">
+      <vuln:source>MISC</vuln:source>
+      <vuln:reference href="https://www.trustmatta.com/advisories/MATTA-2012-001.txt" xml:lang="en">https://www.trustmatta.com/advisories/MATTA-2012-001.txt</vuln:reference>
+    </vuln:references>
+    <vuln:summary>The FeedProxy.aspx script in Umbraco 4.7.0 allows remote attackers to proxy requests on their behalf via the "url" parameter.</vuln:summary>
+  </entry>
+  <entry id="CVE-2012-6697">
+    <vuln:cve-id>CVE-2012-6697</vuln:cve-id>
+    <vuln:published-datetime>2017-04-13T10:59:00.480-04:00</vuln:published-datetime>
+    <vuln:last-modified-datetime>2017-04-13T10:59:00.637-04:00</vuln:last-modified-datetime>
+    <vuln:references xml:lang="en" reference_type="UNKNOWN">
+      <vuln:source>DEBIAN</vuln:source>
+      <vuln:reference href="http://www.debian.org/security/2015/dsa-3226" xml:lang="en">DSA-3226</vuln:reference>
+    </vuln:references>
+    <vuln:references xml:lang="en" reference_type="UNKNOWN">
+      <vuln:source>CONFIRM</vuln:source>
+      <vuln:reference href="https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=780880" xml:lang="en">https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=780880</vuln:reference>
+    </vuln:references>
+    <vuln:references xml:lang="en" reference_type="UNKNOWN">
+      <vuln:source>CONFIRM</vuln:source>
+      <vuln:reference href="https://github.com/inspircd/inspircd/commit/58c893e834ff20495d00770922" xml:lang="en">https://github.com/inspircd/inspircd/commit/58c893e834ff20495d00770922</vuln:reference>
+    </vuln:references>
+    <vuln:references xml:lang="en" reference_type="UNKNOWN">
+      <vuln:source>GENTOO</vuln:source>
+      <vuln:reference href="https://security.gentoo.org/glsa/201512-13" xml:lang="en">GLSA-201512-13</vuln:reference>
+    </vuln:references>
+    <vuln:summary>InspIRCd before 2.0.7 allows remote attackers to cause a denial of service (infinite loop).</vuln:summary>
+  </entry>
+</nvd>
