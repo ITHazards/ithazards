@@ -113,6 +113,18 @@
     (println (apply str ["Search engine initialized on " url]))
     es))
 
+(defn scrape-file [source-url es-url]
+  (let [
+        nvd (get-zipper source-url)
+        es (init-search es-url)]
+    (def published (get (get (zip/node nvd) :attrs) :pub_date))
+    (println (apply str ["Published date is " published]))
+    (def entries (walk-entries (zip/down nvd) es))
+    (println (apply str [
+                         "Parsing finished, "
+                         (count entries)
+                         " entries parsed"]))))
+
 (def cli-options
   [
    ["-i" "--indexer URL" "Elasticsearch URL"
@@ -147,14 +159,4 @@
       (:indexer options) (def es-url (get options :indexer))
       (>= (count arguments) 1) (def source-url (first arguments))
       errors (exit 1 (error-msg errors))))
-  (let [
-    nvd (get-zipper source-url)
-    es (init-search es-url)]
-    (def published (get (get (zip/node nvd) :attrs) :pub_date))
-    (println (apply str ["Published date is " published]))
-    (def entries (walk-entries (zip/down nvd) es))
-    (println (apply str [
-      "Parsing finished, "
-      (count entries)
-      " entries parsed"])))
-  )
+  (scrape-file source-url es-url))
