@@ -97,3 +97,21 @@
               (zip/node ..zipper..) => {:attrs {:pub_date "2010-09-09T09:09:09.000+02:00"}}
               (zip/down ..zipper..) => ..entries..
               (walk-entries ..entries.. ..indexer..) => [0 1 2 3 4 5])))
+
+(facts "about `process args`"
+       (fact "it sets default values"
+             (process-args []) => anything
+             es-url => "http://localhost:9200"
+             source-url => "https://nvd.nist.gov/feeds/xml/cve/nvdcve-2.0-Modified.xml.gz")
+       (fact "it sets `-i` option as es-url"
+             (process-args ["-i" "http://search:9200"]) => anything
+             es-url => "http://search:9200"
+             source-url => "https://nvd.nist.gov/feeds/xml/cve/nvdcve-2.0-Modified.xml.gz")
+       (fact "it sets first argument as source url"
+             (process-args ["https://mysource.com"]) => anything
+             es-url => "http://localhost:9200"
+             source-url => "https://mysource.com")
+       (fact "it sets `-i` option as es-url and first argument as source-url"
+             (process-args ["-i" "http://search:9200" "https://mysource.com"]) => anything
+             es-url => "http://search:9200"
+             source-url => "https://mysource.com"))
