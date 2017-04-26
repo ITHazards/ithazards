@@ -10,8 +10,8 @@
   (:import java.util.zip.GZIPInputStream)
   (:gen-class))
 
-(def source-url "https://nvd.nist.gov/feeds/xml/cve/nvdcve-2.0-Modified.xml.gz")
 (def es-url "http://localhost:9200")
+(def source-url "https://nvd.nist.gov/feeds/xml/cve/nvdcve-2.0-Modified.xml.gz")
 (def es-vulnerability-map {
     "vulnerability" {
       :properties {
@@ -94,7 +94,11 @@
         "vulnerability"
         (get content :cve-id)
         content)
-      (println (apply str [(get content :cve-id) " indexed"]))
+      (println (apply str [
+                           (get content :cve-id)
+                           " ("
+                           (count (get content :affected-software))
+                           ") indexed"]))
       (conj (walk-entries (zip/right entry) indexer) content))
     []))
 
@@ -149,14 +153,20 @@
   (str "The following errors occurred while parsing your command:\n\n"
        (str/join \newline errors)))
 
+(defn process-args [args]
+  (let [
+        {:keys [options arguments errors summary]} (cli/parse-opts args cli-options)]
+    (cond
+      (:help options) (exit 1 (usage summary))
+      (:indexer options) (def es-url (get options :indexer))
+      errors (exit 1 (error-msg errors))
+      )
+    (if (>= (count arguments) 1) (def source-url (first arguments)))
+    )
+  )
+
 (defn -main
   "I don't do a whole lot ... yet."
   [& args]
-  (let [
-    {:keys [options arguments errors summary]} (cli/parse-opts args cli-options)]
-    (cond
-      (:help options) (exit 0 (usage summary))
-      (:indexer options) (def es-url (get options :indexer))
-      (>= (count arguments) 1) (def source-url (first arguments))
-      errors (exit 1 (error-msg errors))))
+  (process-args args)
   (scrape-file source-url es-url))
