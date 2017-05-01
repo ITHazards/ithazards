@@ -11,6 +11,8 @@
                  [ring "1.5.0"]
                  [ring/ring-defaults "0.2.1"]
                  [compojure "1.5.1"]
+                 [adzerk/env "0.4.0"]
+                 [cljs-ajax "0.3.10"]
                  [hiccup "1.0.5"]
                  [yogthos/config "0.8"]
                  [org.clojure/clojurescript "1.9.473"
@@ -52,7 +54,7 @@
              {:output-to "target/cljsbuild/public/js/app.js"
               :output-dir "target/uberjar"
               :optimizations :advanced
-              :pretty-print  false}}
+              :pretty-print  true}}
             :app
             {:source-paths ["src/cljs" "src/cljc" "env/dev/cljs"]
              :compiler
@@ -73,6 +75,7 @@
   :figwheel
   {:http-server-root "public"
    :server-port 3449
+   :server-ip "0.0.0.0"
    :nrepl-port 7002
    :nrepl-middleware ["cemerick.piggieback/wrap-cljs-repl"
                       ]
