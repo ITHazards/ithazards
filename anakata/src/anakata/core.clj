@@ -61,4 +61,9 @@
         :return [Vulnerability]
         :header-params [{from :- s/Int 0} {size :- s/Int 10}]
         :summary "Gets vulnerabilities"
-        (ok (get-vulnerabilities from size))))))
+        (let [response (ok (get-vulnerabilities from size))]
+          (-> response
+              (assoc-in [:headers "Access-Control-Allow-Origin"] "*")
+              )
+          )
+        ))))

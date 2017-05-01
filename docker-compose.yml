@@ -10,7 +10,7 @@ services:
       test: "curl -f http://localhost:9200/_cluster/health | grep green"
   parser:
     build: tflow/
-    container_name: parser
+    container_name: tflow
     command: lein run -- -i http://elasticsearch:9200 https://static.nvd.nist.gov/feeds/xml/cve/nvdcve-2.0-2002.xml.gz
     network_mode: bridge
     depends_on:
@@ -19,7 +19,7 @@ services:
       - search
   api:
     build: anakata/
-    container_name: api
+    container_name: anakata
     environment:
       - ES_URL=http://elasticsearch:9200
     ports:
@@ -34,9 +34,10 @@ services:
       test: "curl -f http://localhost:3001/ | grep -i swagger"
   web:
     build: phiber-optik/
-    container_name: web
+    container_name: phiber-optik
     ports:
       - "3000:3000"
+      - "3449:3449"
     network_mode: bridge
     depends_on:
       - api
